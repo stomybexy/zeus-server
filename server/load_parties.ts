@@ -27,6 +27,14 @@ export function loadParties() {
         for (var i = 0; i < parties.length; i++) {
             Parties.insert(parties[i]);
         }
-    }
 
+        for (var i = 0; i < 27; i++) {
+            Parties.insert({
+                name: Fake.sentence(50),
+                location: Fake.sentence(10),
+                description: Fake.sentence(100),
+                public: true
+            });
+        }
+    }
 };

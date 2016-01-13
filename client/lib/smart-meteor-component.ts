@@ -21,6 +21,7 @@ export class SmartMeteorComponent extends MeteorComponent {
                     return;
                 }
                 console.log(opt);
+                
                 if (opt.args.single) {
                     this[name] = Meteor.connection._mongo_livedata_collections[opt.collName].findOne(opt.args.selector || {}, opt.args.options || {});
                     // console.log(this[name]);

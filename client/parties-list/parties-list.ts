@@ -42,12 +42,7 @@ export class PartiesList extends SmartMeteorComponent {
                 sort: { name: this.nameOrder.get() }
             }
             
-            // let options2 = {
-            //     limit: this.pageSize,
-            //     sort: { name: this.nameOrder.get() },
-            //     skip: (this.curPage.get() - 1) * this.pageSize
-                
-            // }
+
 
             this.smartSubscribe('parties', options, this.location.get());
             
