@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "system",
+        "experimentalDecorators": true
+    },
+    "typings": [
+        "typings/angular2-meteor.d.ts",
+        "typings/party.d.ts",
+        "typings/meteor-accounts-ui.d.ts",
+        "typings/meteor-accounts.d.ts",
+        "typings/ng2-pagination.d.ts"
+    ]
+}
