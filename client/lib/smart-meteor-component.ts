@@ -53,5 +53,18 @@ export class SmartMeteorComponent extends MeteorComponent {
 
 
     }
+    smartPageSubscribe(name: string, pageOptions, ...rest) {
+        this.autorun(() => {
+            var pageOptions = pageOptions || {}
+            let options = {
+                limit: this[pageOptions.pageSizeProp || 'pageSize'],
+                skip: (this[pageOptions.curPageProp || 'curPage'].get() - 1) * this[pageOptions.pageSizeProp || 'pageSize'],
+                sort: this[pageOptions.sortProp || 'sort'].get()
+            };
+
+            this.smartSubscribe(name, options, ...rest);
+
+        });
+    }
 
 }
