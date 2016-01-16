@@ -1,4 +1,4 @@
 import {loadParties} from './load_parties';
-import './parties';
+import 'pubs/parties';
  
 Meteor.startup(loadParties);

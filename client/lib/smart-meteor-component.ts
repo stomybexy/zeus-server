@@ -12,24 +12,44 @@ export class SmartMeteorComponent extends MeteorComponent {
     }
 
     smartSubscribe(name: string, ...rest): Meteor.SubscriptionHandle {
-       
-            return super.subscribe.call(this, name,...rest, () => {
-                var pubId = EJSON.stringify({pub: name, args: rest});
-                console.log(PubReg.find({}).fetch());
-                var opt = PubReg.findOne(pubId);
-                if (!opt || !opt.args) {
+
+        return super.subscribe.call(this, name, ...rest, () => {
+            var self = this
+
+            super.call.call(self, name, ...rest, (err, opt) => {
+
+                if (!opt || !opt.collName) {
                     return;
                 }
-                console.log(opt);
-                
-                if (opt.args.single) {
-                    this[name] = Meteor.connection._mongo_livedata_collections[opt.collName].findOne(opt.args.selector || {}, opt.args.options || {});
+                if (opt.single) {
+                    this._zone.run(() => {
+                        this[name] = Mongo.Collection.get(opt.collName).findOne(opt.selector || {}, {
+                            sort: opt.sort,
+                            // skip: opt.skip,
+                            // limit: opt.limit,
+                            fields: opt.fields,
+                            transform: opt.transform
+                        });
+                    })
+
                     // console.log(this[name]);
                 } else {
-                    this[name] = Meteor.connection._mongo_livedata_collections[opt.collName].find(opt.args.selector || {}, opt.args.options || {});
+                    this._zone.run(() => {
+                        this[name] = Mongo.Collection.get(opt.collName).find(opt.selector || {}, {
+                            sort: opt.sort,
+                            // skip: opt.skip,
+                            // limit: opt.limit,
+                            fields: opt.fields,
+                            transform: opt.transform
+                        });
+                    })
+
+                    // console.log(this[name]);
 
                 }
-            }, true);
+            });
+
+        }, true);
 
 
     }

@@ -9,6 +9,8 @@ import {PartiesList} from 'client/parties-list/parties-list';
 
 import {PartyDetails} from 'client/party-details/party-details';
 
+import 'pubs/parties';
+
 
 
 @Component({
