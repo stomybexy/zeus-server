@@ -27,6 +27,8 @@ import {SmartMeteorComponent} from 'client/lib/smart-meteor-component';
 })
 export class PartiesList extends SmartMeteorComponent {
     parties: Mongo.Cursor<Party>;
+    parties3: Mongo.Cursor<Party>;
+
     pageSize: number = 10;
     curPage: ReactiveVar<number> = new ReactiveVar<number>(1);
     sort: ReactiveVar<Object> = new ReactiveVar<Object>({
@@ -45,7 +47,8 @@ export class PartiesList extends SmartMeteorComponent {
         //     }
 
 
-        this.autorun(() => this.smartPageSubscribe('parties', null, this.location.get()))
+        this.autorun(() => this.smartPageSubscribe('parties', {}, this.location.get()));
+        this.smartSubscribe({ name: 'parties2', varName: 'parties3' });
             
         // this.smartSubscribe('parties', options2, this.location.get());
             

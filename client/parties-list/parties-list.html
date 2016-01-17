@@ -10,14 +10,26 @@
             <option value="-1">Descending</option>
         </select>
     </div>
-    <ul>
-         <li *ngFor="#party of parties | paginate:{currentPage: 1, itemsPerPage: pageSize, totalItems: partiesSize}">
+    <!--<ul>
+        <li *ngFor="#party of parties | paginate:{currentPage: 1, itemsPerPage: pageSize, totalItems: partiesSize}">
             <a [routerLink]="['/PartyDetails', {partyId: party._id}]">{{party.name}}</a>
             <p>{{party.description}}</p>
             <p>{{party.location}}</p>
+            <p>Created by: {{party.creator ? party.creator.emails[0].address: ""}}</p>
             <button (click)="removeParty(party)">X</button>
         </li>
     </ul>
-    <pagination-controls (change)="onPageChanged($event.page)"></pagination-controls>
+    <pagination-controls (change)="onPageChanged($event.page)"></pagination-controls>-->
+
+    <ul>
+        <li *ngFor="#party of parties3">
+            <a [routerLink]="['/PartyDetails', {partyId: party._id}]">{{party.name}}</a>
+            <p>{{party.description}}</p>
+            <p>{{party.location}}</p>
+            <p>{{party.owner}}</p>
+            <p>Created by: {{party.creator ? party.creator.emails[0].address: ""}}</p>
+            <button (click)="removeParty(party)">X</button>
+        </li>
+    </ul>
 
 </div>

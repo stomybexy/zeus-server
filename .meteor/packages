@@ -24,3 +24,4 @@ tmeasday:publish-counts
 ejson
 dburles:mongo-collection-instances
 urigo:angular2-meteor@0.3.7
+reywood:publish-composite
