@@ -1,4 +1,4 @@
-import {smartPublish, smartPublishComposite} from 'lib/smart-publish';
+import {smartPublish, smartPublishComposite} from 'ng2-smart-pub';
 import {Parties} from 'collections/parties';
 
 function buildQuery(partyId?: string, location?: string): Object {
@@ -52,20 +52,21 @@ smartPublish('party', function(partyId) {
 });
 
 smartPublishComposite('parties2', {
-    find: () => {
+    find: (options, location) => {
         return {
+            selector: buildQuery.call(this, null, location),
+            sort: options.sort,
+            skip: options.skip,
+            limit: options.limit,
             coll: Parties,
             single: false,
-            name: 'parties2',
-            sort: {
-                name: 1
-            }
+            name: 'parties2'
 
         }
     },
     children: [{
         find: (party) => {
-            
+
             return {
                 selector: {
                     _id: party.owner

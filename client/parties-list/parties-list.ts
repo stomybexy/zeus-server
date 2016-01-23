@@ -14,7 +14,10 @@ import {PubReg} from 'client/collections/pub-reg'
 
 import {PaginationService, PaginatePipe, PaginationControlsCpm} from 'ng2-pagination';
 
-import {SmartMeteorComponent} from 'client/lib/smart-meteor-component';
+// import {SmartMeteorComponent} from 'client/lib/smart-meteor-component';
+
+import {SmartMeteorComponent} from 'ng2-smart-sub';
+
 
 @Component({
     selector: 'parties-list',
@@ -48,7 +51,7 @@ export class PartiesList extends SmartMeteorComponent {
 
 
         this.autorun(() => this.smartPageSubscribe('parties', {}, this.location.get()));
-        this.smartSubscribe({ name: 'parties2', varName: 'parties3' });
+        this.smartPageSubscribe({ name: 'parties2', varName: 'parties3' }, {}, 'CA');
             
         // this.smartSubscribe('parties', options2, this.location.get());
             

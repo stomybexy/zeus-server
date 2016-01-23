@@ -25,3 +25,4 @@ ejson
 dburles:mongo-collection-instances
 urigo:angular2-meteor@0.3.7
 reywood:publish-composite
+jonatan:ng2-smart-pub-sub
