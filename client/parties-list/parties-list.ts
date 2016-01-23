@@ -30,7 +30,7 @@ import {SmartMeteorComponent} from 'ng2-smart-sub';
 })
 export class PartiesList extends SmartMeteorComponent {
     parties: Mongo.Cursor<Party>;
-    parties3: Mongo.Cursor<Party>;
+    parties2: Mongo.Cursor<Party>;
 
     pageSize: number = 10;
     curPage: ReactiveVar<number> = new ReactiveVar<number>(1);
@@ -42,23 +42,23 @@ export class PartiesList extends SmartMeteorComponent {
 
     constructor() {
         super();
-        // this.autorun(() => {
-        //     let options = {
-        //         limit: this.pageSize,
-        //         skip: (this.curPage.get() - 1) * this.pageSize,
-        //         sort: this.sort.get()
-        //     }
+        this.autorun(() => {
+            // let options = {
+            //     limit: this.pageSize,
+            //     skip: (this.curPage.get() - 1) * this.pageSize,
+            //     sort: this.sort.get()
+            // }
 
 
-        this.autorun(() => this.smartPageSubscribe('parties', {}, this.location.get()));
-        this.smartPageSubscribe({ name: 'parties2', varName: 'parties3' }, {}, 'CA');
+        // this.autorun(() => this.smartPageSubscribe('parties', {}, this.location.get()));
+       this.smartPageSubscribe('parties2', null, this.location.get());
             
         // this.smartSubscribe('parties', options2, this.location.get());
             
         // this.subscribe('parties', options, this.location.get(), () => {
         //     this.parties = Parties.find({}, { sort: { name: this.nameOrder.get() } });
 
-        // }, true);
+        }, true);
         // });
 
         this.autorun(() => {

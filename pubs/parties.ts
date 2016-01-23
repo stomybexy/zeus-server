@@ -24,7 +24,7 @@ function buildQuery(partyId?: string, location?: string): Object {
 }
 
 smartPublish('parties', function(options, location) {
-    if (Meteor.isServer && this.added) {
+    if (Meteor.isServer && _.isFunction(this.added)) {
         var self = this;
         Counts.publish(this, 'numberOfParties',
             Parties.find(buildQuery.call(this, null, location)), { noReady: true });
@@ -52,7 +52,12 @@ smartPublish('party', function(partyId) {
 });
 
 smartPublishComposite('parties2', {
-    find: (options, location) => {
+    find: function(options, location) {
+        if (Meteor.isServer && _.isFunction(this.added)) {
+
+            Counts.publish(this, 'numberOfParties',
+                Parties.find(buildQuery.call(this, null, location)), { noReady: true });
+        }
         return {
             selector: buildQuery.call(this, null, location),
             sort: options.sort,
@@ -65,7 +70,7 @@ smartPublishComposite('parties2', {
         }
     },
     children: [{
-        find: (party) => {
+        find: function(party) {
 
             return {
                 selector: {
